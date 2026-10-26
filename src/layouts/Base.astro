@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+import DesignSwitcher from '../components/DesignSwitcher.astro';
+import { site } from '../data/site.js';
+import { areas } from '../data/areas.js';
+
+const {
+  title,
+  description,
+  schema = [],       // extra JSON-LD objects for this page
+  breadcrumbs = [],  // [{ name, href }] for BreadcrumbList schema
+  ogImage = '/og-image.jpg',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.url).href.replace(/\/$/, '') || site.url;
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'Electrician',
+  '@id': `${site.url}/#business`,
+  name: site.name,
+  url: site.url,
+  telephone: site.phone.tel,
+  email: site.email,
+  image: new URL(ogImage, site.url).href,
+  priceRange: 'Free estimates',
+  areaServed: areas.map((a) => ({ '@type': 'City', name: `${a.city}, KS` })),
+  ...(site.googleBusinessUrl ? { sameAs: [site.googleBusinessUrl] } : {}),
+};
+
+const crumbSchema = breadcrumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ name: 'Home', href: '/' }, ...breadcrumbs].map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: new URL(b.href, site.url).href,
+      })),
+    }
+  : null;
+
+const jsonLd = [business, crumbSchema, ...schema].filter(Boolean);
+---
+<!doctype html>
+<html lang="en" data-theme="heritage" data-hero="full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#13294b" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, site.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {site.showDesignSwitcher && (
+      <script is:inline>
+        // ?theme=modern&hero=split overrides (and saves) the choice, for sharing a specific combo.
+        (function () {
+          var q = new URLSearchParams(location.search), d = document.documentElement;
+          ['theme', 'hero'].forEach(function (k) {
+            var v = q.get(k);
+            try { if (v) localStorage.setItem('ve-' + k, v); else v = localStorage.getItem('ve-' + k); } catch (e) {}
+            if (v) d.dataset[k] = v;
+          });
+        })();
+      </script>
+    )}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- All three option fonts load during design review; trim to the chosen one before launch. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" />
+
+    {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <MobileBar />
+    {site.showDesignSwitcher && <DesignSwitcher />}
+  </body>
+</html>

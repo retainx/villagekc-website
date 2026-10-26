@@ -1,0 +1,42 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site, smsHref, telHref } from '../data/site.js';
+import { services } from '../data/services.js';
+import { areas } from '../data/areas.js';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <Logo />
+      <p>Residential electrical service for homeowners in {site.region}. {site.licensed}, insured, with a {site.warranty} on our work.</p>
+      <div class="footer-ctas">
+        <a href={telHref} class="btn btn-accent btn-sm"><Icon name="phone" size={18} /> Call</a>
+        <a href={smsHref} class="btn btn-ghost btn-sm"><Icon name="text" size={18} /> Text</a>
+        <a href="/contact#estimate" class="btn btn-ghost btn-sm"><Icon name="mail" size={18} /> Message</a>
+      </div>
+    </div>
+    <div>
+      <h3>Services</h3>
+      <ul>{services.map((s) => <li><a href={`/services/${s.slug}`}>{s.navName}</a></li>)}</ul>
+    </div>
+    <div>
+      <h3>Service areas</h3>
+      <ul>{areas.map((a) => <li><a href={`/service-areas/${a.slug}`}>{a.city}, KS</a></li>)}</ul>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <ul class="footer-contact">
+        <li><a href={telHref}><Icon name="phone" size={16} /> {site.phone.display}</a></li>
+        <li><a href={smsHref}><Icon name="text" size={16} /> Text {site.text.display}</a></li>
+        <li><a href={`mailto:${site.email}`}><Icon name="mail" size={16} /> {site.email}</a></li>
+        <li><a href="/about">About us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>&copy; {year} {site.legalName}. All rights reserved.</span>
+    <span>{site.licensed} &middot; Insured</span>
+  </div>
+</footer>

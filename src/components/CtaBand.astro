@@ -1,0 +1,21 @@
+---
+import Icon from './Icon.astro';
+import { site, smsHref, telHref } from '../data/site.js';
+const {
+  heading = 'Get your free estimate',
+  text = `Call, text or send a message. We'll get back to you quickly.`,
+} = Astro.props;
+---
+<section class="cta-band">
+  <div class="container cta-band-inner">
+    <div>
+      <h2>{heading}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="cta-row">
+      <a href={telHref} class="btn btn-accent btn-lg" data-cta="band-call"><Icon name="phone" /> Call {site.phone.display}</a>
+      <a href={smsHref} class="btn btn-light btn-lg" data-cta="band-text"><Icon name="text" /> Text us</a>
+      <a href="#estimate" class="btn btn-outline-light btn-lg" data-cta="band-message"><Icon name="mail" /> Send a message</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+---
+// Lead-capture section with id="estimate". Every page includes it so the
+// "Message" buttons (header, sticky mobile bar, CTA band) always have a target.
+import Icon from './Icon.astro';
+import LeadForm from './LeadForm.astro';
+import { site, smsHref, telHref } from '../data/site.js';
+const { heading = 'Request a free estimate', service = '', city = '' } = Astro.props;
+---
+<section class="section estimate" id="estimate">
+  <div class="container estimate-grid">
+    <div class="estimate-copy">
+      <p class="eyebrow">Free estimates</p>
+      <h2>{heading}</h2>
+      <p>Tell us what you need and we'll get back to you, usually the same business day. Only your email and a short description are required.</p>
+      <ul class="contact-list">
+        <li><a href={telHref}><span class="ci"><Icon name="phone" /></span><span><strong>Call</strong>{site.phone.display}</span></a></li>
+        <li><a href={smsHref}><span class="ci"><Icon name="text" /></span><span><strong>Text</strong>{site.text.display}</span></a></li>
+        <li><a href={`mailto:${site.email}`}><span class="ci"><Icon name="mail" /></span><span><strong>Email</strong>{site.email}</span></a></li>
+      </ul>
+    </div>
+    <div class="estimate-card">
+      <LeadForm service={service} city={city} />
+    </div>
+  </div>
+</section>

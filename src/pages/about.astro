@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import TrustBar from '../components/TrustBar.astro';
+import CtaBand from '../components/CtaBand.astro';
+import EstimateSection from '../components/EstimateSection.astro';
+import { site } from '../data/site.js';
+const crumbs = [{ name: 'About', href: '/about' }];
+---
+<Base
+  title="About Us"
+  description={`${site.name} is a locally owned residential electrician with ${site.yearsInBusiness} years in business, licensed in Johnson County, KS, and insured.`}
+  breadcrumbs={crumbs}
+>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>About {site.name}</h1>
+      <p class="lead">A locally owned residential electrician serving Johnson County for {site.yearsInBusiness} years.</p>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container split">
+      <div class="prose">
+        <p class="draft-note">TODO(owner): your story, photos of you and your crew, and what sets you apart.</p>
+        <p>{site.name} has helped Johnson County homeowners with their electrical needs for {site.yearsInBusiness} years. We focus on residential work, so every job gets the attention it deserves, whether it's a single outlet or a full panel replacement.</p>
+        <p>We're licensed in Johnson County, Kansas, and fully insured, and every job is backed by our {site.warranty}.</p>
+      </div>
+      <div class="photo-placeholder" role="img" aria-label="Photo placeholder">
+        <Icon name="bolt" size={48} />
+        <span>Owner / team photo</span>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+  <EstimateSection />
+</Base>

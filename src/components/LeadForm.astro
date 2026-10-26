@@ -1,0 +1,112 @@
+---
+// Lead form. Only email and description are required, to keep friction low.
+import Icon from './Icon.astro';
+import { site, smsHref, telHref } from '../data/site.js';
+import { services } from '../data/services.js';
+import { areas } from '../data/areas.js';
+const { service = '', city = '', compact = false } = Astro.props;
+---
+<form class:list={['lead-form', { compact }]} data-endpoint={site.leadEndpoint} novalidate>
+  <div class="form-grid">
+    <label>
+      <span>Name</span>
+      <input name="name" autocomplete="name" />
+    </label>
+    <label>
+      <span>Phone</span>
+      <input name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+    </label>
+    <label class="span-2">
+      <span>Email <em>*</em></span>
+      <input name="email" type="email" autocomplete="email" required />
+    </label>
+    {!compact && (
+      <label>
+        <span>City</span>
+        <select name="city">
+          <option value="">Select…</option>
+          {areas.map((a) => <option selected={a.city === city}>{a.city}</option>)}
+          <option>Other</option>
+        </select>
+      </label>
+    )}
+    {!compact && (
+      <label>
+        <span>Service</span>
+        <select name="service">
+          <option value="">Select…</option>
+          {services.map((s) => <option selected={s.slug === service}>{s.name}</option>)}
+          <option>Something else</option>
+        </select>
+      </label>
+    )}
+    <label class="span-2">
+      <span>How can we help? <em>*</em></span>
+      <textarea name="description" rows={compact ? 3 : 4} required placeholder="Example: Replace two ceiling fans and add a light in the garage."></textarea>
+    </label>
+    {!compact && (
+      <fieldset class="span-2 contact-pref">
+        <legend>Best way to reach you</legend>
+        <label><input type="radio" name="contact_pref" value="call" /> Call</label>
+        <label><input type="radio" name="contact_pref" value="text" checked /> Text</label>
+        <label><input type="radio" name="contact_pref" value="email" /> Email</label>
+      </fieldset>
+    )}
+    <!-- Honeypot: bots fill it, people never see it. -->
+    <label class="hp" aria-hidden="true">Company<input name="company" tabindex="-1" autocomplete="off" /></label>
+  </div>
+  <button type="submit" class="btn btn-accent btn-lg btn-block" data-cta="form-submit">
+    <Icon name="arrow" /> Request my free estimate
+  </button>
+  <p class="form-alt">Prefer to talk? <a href={telHref}>Call</a> or <a href={smsHref}>text</a> {site.phone.display}.</p>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  document.querySelectorAll('form.lead-form').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = form.querySelector('.form-status');
+      const email = form.elements.email;
+      const desc = form.elements.description;
+      form.querySelectorAll('.invalid').forEach((el) => el.classList.remove('invalid'));
+      let bad = null;
+      if (!desc.value.trim()) { desc.classList.add('invalid'); bad = desc; }
+      if (!email.value.trim() || !email.checkValidity()) { email.classList.add('invalid'); bad = email; }
+      if (bad) {
+        status.textContent = 'Please add your email and a short description.';
+        status.className = 'form-status error';
+        bad.focus();
+        return;
+      }
+      const data = Object.fromEntries(new FormData(form));
+      if (data.company) return; // honeypot
+      data.page = location.pathname;
+
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        status.textContent = 'Preview only: the form is not connected yet. (Data captured: ' + JSON.stringify(data) + ')';
+        status.className = 'form-status notice';
+        return;
+      }
+      const btn = form.querySelector('button[type=submit]');
+      btn.disabled = true;
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        status.textContent = "Thanks! We got your request and will be in touch soon.";
+        status.className = 'form-status success';
+      } catch {
+        status.textContent = "Sorry, that didn't go through. Please call or text us instead.";
+        status.className = 'form-status error';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>

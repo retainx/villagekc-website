@@ -1,0 +1,63 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site, smsHref, telHref } from '../data/site.js';
+import { services } from '../data/services.js';
+import { areas } from '../data/areas.js';
+---
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span class="topbar-long"><Icon name="shield" size={16} /> {site.licensed} &amp; insured</span>
+    <span class="topbar-short"><Icon name="shield" size={16} /> Licensed &amp; insured</span>
+    <span class="hide-sm"><Icon name="award" size={16} /> {site.warranty}</span>
+    <span class="hide-sm"><Icon name="dollar" size={16} /> Free estimates</span>
+    <a href={telHref} class="topbar-phone"><Icon name="phone" size={16} /> {site.phone.display}</a>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <Logo />
+
+    <nav class="main-nav" id="main-nav" aria-label="Main">
+      <ul>
+        <li class="has-menu">
+          <a href="/services">Services <Icon name="chevron" size={16} /></a>
+          <div class="menu menu-wide">
+            {services.map((s) => (
+              <a href={`/services/${s.slug}`}><Icon name={s.icon} size={18} /> {s.navName}</a>
+            ))}
+          </div>
+        </li>
+        <li class="has-menu">
+          <a href="/service-areas">Service Areas <Icon name="chevron" size={16} /></a>
+          <div class="menu">
+            {areas.map((a) => (
+              <a href={`/service-areas/${a.slug}`}><Icon name="pin" size={18} /> {a.city}</a>
+            ))}
+          </div>
+        </li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-ctas">
+      <a href={smsHref} class="btn btn-accent btn-sm" data-cta="header-text">
+        <Icon name="text" size={18} /> <span>Text us</span>
+      </a>
+      <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu">
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('main-nav');
+  btn?.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+</script>

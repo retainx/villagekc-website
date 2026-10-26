@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AreaGrid from '../../components/AreaGrid.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import EstimateSection from '../../components/EstimateSection.astro';
+import { site } from '../../data/site.js';
+const crumbs = [{ name: 'Service Areas', href: '/service-areas' }];
+---
+<Base
+  title="Electrician Service Areas in Johnson County, KS"
+  description={`${site.name} serves Overland Park, Leawood, Prairie Village, Lenexa, Shawnee, Mission and Roeland Park, KS. Licensed in Johnson County. Free estimates.`}
+  breadcrumbs={crumbs}
+>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Areas we serve</h1>
+      <p class="lead">{site.name} is licensed in Johnson County, Kansas, and serves homeowners in these cities.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container"><AreaGrid /></div>
+  </section>
+  <CtaBand />
+  <EstimateSection />
+</Base>

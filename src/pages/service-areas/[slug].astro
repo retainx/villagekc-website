@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import AreaGrid from '../../components/AreaGrid.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import EstimateSection from '../../components/EstimateSection.astro';
+import { site, smsHref, telHref } from '../../data/site.js';
+import { areas, state } from '../../data/areas.js';
+
+export function getStaticPaths() {
+  return areas.map((a) => ({ params: { slug: a.slug }, props: { a } }));
+}
+const { a } = Astro.props;
+const place = `${a.city}, ${state}`;
+const crumbs = [{ name: 'Service Areas', href: '/service-areas' }, { name: place, href: `/service-areas/${a.slug}` }];
+---
+<Base
+  title={`Electrician in ${place}`}
+  description={`Licensed, insured residential electrician in ${place}. Panel replacements, ceiling fans, EV chargers, lighting and repairs. Free estimates from ${site.name}.`}
+  breadcrumbs={crumbs}
+>
+  <section class="page-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <Breadcrumbs items={crumbs} />
+        <h1>Residential electrician in {place}</h1>
+        <p class="lead">Licensed in Johnson County and insured, with a {site.warranty} on every job.</p>
+        <div class="cta-row">
+          <a href={telHref} class="btn btn-accent btn-lg"><Icon name="phone" /> Call {site.phone.display}</a>
+          <a href={smsHref} class="btn btn-light btn-lg"><Icon name="text" /> Text us</a>
+          <a href="#estimate" class="btn btn-outline-light btn-lg"><Icon name="mail" /> Message</a>
+        </div>
+      </div>
+      <span class="page-hero-icon" aria-hidden="true"><Icon name="pin" size={96} /></span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose-narrow">
+      {a.content
+        ? <div class="prose" set:html={a.content} />
+        : (
+          <div class="prose">
+            <p class="draft-note">Draft: local content for {a.city} coming soon.</p>
+            <p>{site.name} provides residential electrical service to homeowners throughout {a.city}. Whether you need a new ceiling fan, a panel replacement, an EV charger or help tracking down a problem, we're a local, licensed electrician who can get it done right.</p>
+          </div>
+        )}
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Services in {a.city}</p>
+        <h2>Electrical services for {a.city} homes</h2>
+      </div>
+      <ServiceGrid />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Nearby areas we serve</h2></div>
+      <AreaGrid exclude={a.slug} />
+    </div>
+  </section>
+
+  <CtaBand heading={`Need an electrician in ${a.city}?`} />
+  <EstimateSection heading={`Free estimates in ${a.city}`} city={a.city} />
+</Base>

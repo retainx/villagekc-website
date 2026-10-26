@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import EstimateSection from '../../components/EstimateSection.astro';
+import { site } from '../../data/site.js';
+const crumbs = [{ name: 'Services', href: '/services' }];
+---
+<Base
+  title="Residential Electrical Services in Johnson County, KS"
+  description={`Ceiling fans, panel replacements, EV chargers, generators, lighting, rewiring and repairs from ${site.name}. Licensed in Johnson County, KS. Free estimates.`}
+  breadcrumbs={crumbs}
+>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Residential electrical services</h1>
+      <p class="lead">Everything your home needs, from a single new outlet to a full panel replacement.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container"><ServiceGrid /></div>
+  </section>
+  <CtaBand />
+  <EstimateSection />
+</Base>

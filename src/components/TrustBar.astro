@@ -1,0 +1,21 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site.js';
+const items = [
+  { icon: 'shield', title: 'Licensed', text: 'Johnson County, KS' },
+  { icon: 'check', title: 'Fully insured', text: 'For your protection' },
+  { icon: 'clock', title: `${site.yearsInBusiness} years`, text: 'In business' },
+  { icon: 'award', title: '1-year warranty', text: 'On our workmanship' },
+  { icon: 'dollar', title: 'Free estimates', text: 'No obligation' },
+];
+---
+<section class="trust-bar" aria-label="Why homeowners choose us">
+  <div class="container trust-grid">
+    {items.map((i) => (
+      <div class="trust-item">
+        <span class="trust-icon"><Icon name={i.icon} /></span>
+        <span><strong>{i.title}</strong><small>{i.text}</small></span>
+      </div>
+    ))}
+  </div>
+</section>

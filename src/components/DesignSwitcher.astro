@@ -1,0 +1,44 @@
+---
+// Floating panel for comparing design options. Choices persist in localStorage
+// and are applied before first paint by the inline script in Base.astro.
+---
+<div class="design-switcher" id="design-switcher">
+  <button class="ds-toggle" aria-expanded="false">Design options</button>
+  <div class="ds-panel">
+    <p class="ds-label">Style</p>
+    <div class="ds-options" data-attr="theme">
+      <button data-value="heritage"><span class="sw" style="background:#13294b"></span><span class="sw" style="background:#f2b33d"></span> A · Heritage</button>
+      <button data-value="modern"><span class="sw" style="background:#0b1f3a"></span><span class="sw" style="background:#2f8cff"></span> B · Modern</button>
+      <button data-value="bold"><span class="sw" style="background:#102a54"></span><span class="sw" style="background:#e5482b"></span> C · Bold</button>
+    </div>
+    <p class="ds-label">Hero layout (home page)</p>
+    <div class="ds-options" data-attr="hero">
+      <button data-value="full">1 · Full video + form</button>
+      <button data-value="split">2 · Split</button>
+      <button data-value="center">3 · Centered</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const box = document.getElementById('design-switcher');
+  const toggle = box.querySelector('.ds-toggle');
+  toggle.addEventListener('click', () => {
+    const open = box.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  const sync = () => box.querySelectorAll('.ds-options').forEach((g) => {
+    g.querySelectorAll('button').forEach((b) =>
+      b.classList.toggle('active', root.dataset[g.dataset.attr] === b.dataset.value));
+  });
+  box.querySelectorAll('.ds-options button').forEach((b) => {
+    b.addEventListener('click', () => {
+      const attr = b.parentElement.dataset.attr;
+      root.dataset[attr] = b.dataset.value;
+      try { localStorage.setItem('ve-' + attr, b.dataset.value); } catch {}
+      sync();
+    });
+  });
+  sync();
+</script>

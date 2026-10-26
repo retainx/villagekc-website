@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import EstimateSection from '../components/EstimateSection.astro';
+import AreaGrid from '../components/AreaGrid.astro';
+import { site } from '../data/site.js';
+const crumbs = [{ name: 'Contact', href: '/contact' }];
+---
+<Base
+  title="Contact Us for a Free Estimate"
+  description={`Call, text or message ${site.name} for a free residential electrical estimate in Johnson County, KS.`}
+  breadcrumbs={crumbs}
+>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Contact us</h1>
+      <p class="lead">Call, text or send a message. Estimates are always free.</p>
+    </div>
+  </section>
+  <EstimateSection heading="Tell us about your project" />
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head"><h2>Areas we serve</h2></div>
+      <AreaGrid />
+    </div>
+  </section>
+</Base>

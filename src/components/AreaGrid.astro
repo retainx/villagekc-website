@@ -1,0 +1,10 @@
+---
+import Icon from './Icon.astro';
+import { areas, state } from '../data/areas.js';
+const { exclude = '' } = Astro.props;
+---
+<ul class="area-grid">
+  {areas.filter((a) => a.slug !== exclude).map((a) => (
+    <li><a href={`/service-areas/${a.slug}`}><Icon name="pin" size={18} /> {a.city}, {state}</a></li>
+  ))}
+</ul>

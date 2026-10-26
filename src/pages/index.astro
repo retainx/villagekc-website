@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import LeadForm from '../components/LeadForm.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import AreaGrid from '../components/AreaGrid.astro';
+import CtaBand from '../components/CtaBand.astro';
+import EstimateSection from '../components/EstimateSection.astro';
+import { site, smsHref, telHref } from '../data/site.js';
+
+const why = [
+  { icon: 'home', title: 'Residential only', text: 'Homes are all we do, so we show up ready for houses like yours, from 1950s ranches to new builds.' },
+  { icon: 'clock', title: 'Quick responses', text: 'Call, text or message and hear back fast. We schedule around you and show up when we say we will.' },
+  { icon: 'shield', title: 'Done right, to code', text: `${site.licensed} and insured. We pull permits when required and leave your home clean.` },
+  { icon: 'award', title: 'Backed by a warranty', text: `Every job carries our ${site.warranty}. If something isn't right, we come back and fix it.` },
+];
+---
+<Base
+  title="Residential Electrician in Johnson County, KS"
+  description={`${site.name} is a licensed, insured residential electrician serving Overland Park, Leawood, Prairie Village, Lenexa, Shawnee, Mission and Roeland Park. Free estimates. Call or text today.`}
+>
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <!-- TODO(owner): drop hero.webm / hero.mp4 (and hero-poster.jpg) into /public. -->
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="/hero.webm" type="video/webm" />
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
+      <span class="hero-placeholder">Hero video goes here</span>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow"><Icon name="pin" size={16} /> Serving {site.regionShort}</p>
+        <h1>Your trusted <span class="hl">residential electrician</span> in Johnson County</h1>
+        <p class="lead">Panel upgrades, ceiling fans, EV chargers, lighting and repairs, done right the first time by a licensed, insured local electrician.</p>
+        <div class="cta-row">
+          <a href={telHref} class="btn btn-accent btn-lg" data-cta="hero-call"><Icon name="phone" /> Call {site.phone.display}</a>
+          <a href={smsHref} class="btn btn-light btn-lg" data-cta="hero-text"><Icon name="text" /> Text us</a>
+          <a href="#estimate" class="btn btn-outline-light btn-lg hero-msg" data-cta="hero-message"><Icon name="mail" /> Message</a>
+        </div>
+        <ul class="hero-badges">
+          <li><Icon name="shield" size={18} /> Licensed &amp; insured</li>
+          <li><Icon name="clock" size={18} /> {site.yearsInBusiness} years</li>
+          <li><Icon name="award" size={18} /> 1-year warranty</li>
+          <li><Icon name="dollar" size={18} /> Free estimates</li>
+        </ul>
+      </div>
+      <div class="hero-card">
+        <h2>Get a free estimate</h2>
+        <p>Takes about a minute. We'll reply quickly.</p>
+        <LeadForm compact />
+      </div>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What we do</p>
+        <h2>Residential electrical services</h2>
+        <p>From a single ceiling fan to a full panel replacement, we handle the electrical work your home needs.</p>
+      </div>
+      <ServiceGrid />
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Why {site.name}</p>
+        <h2>A local electrician who treats your home like our own</h2>
+        <div class="why-grid">
+          {why.map((w) => (
+            <div class="why-item">
+              <span class="why-icon"><Icon name={w.icon} /></span>
+              <div><h3>{w.title}</h3><p>{w.text}</p></div>
+            </div>
+          ))}
+        </div>
+        <div class="cta-row">
+          <a href={telHref} class="btn btn-primary"><Icon name="phone" /> Call now</a>
+          <a href="/about" class="btn btn-ghost">About us <Icon name="arrow" size={18} /></a>
+        </div>
+      </div>
+      <div class="photo-placeholder" role="img" aria-label="Photo placeholder">
+        <Icon name="bolt" size={48} />
+        <span>Team / truck / job photo</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2>Three easy steps</h2>
+      </div>
+      <ol class="steps">
+        <li><span class="step-n">1</span><h3>Reach out</h3><p>Call, text or send a message with what you need. Photos help.</p></li>
+        <li><span class="step-n">2</span><h3>Free estimate</h3><p>We review the job, answer your questions and give you a clear price up front.</p></li>
+        <li><span class="step-n">3</span><h3>Done right</h3><p>We do the work cleanly and to code, backed by our {site.warranty}.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Service areas</p>
+        <h2>Proudly serving Johnson County, Kansas</h2>
+        <p>We're licensed in Johnson County and work throughout these communities:</p>
+        <AreaGrid />
+      </div>
+      <div class="reviews-card">
+        <div class="stars" aria-hidden="true">{[1, 2, 3, 4, 5].map(() => <Icon name="star" size={22} />)}</div>
+        <h3>What our customers say</h3>
+        <p class="muted">Google reviews will be shown here once the Google Business link is added.</p>
+        {site.googleBusinessUrl
+          ? <a class="btn btn-primary" href={site.googleBusinessUrl} rel="noopener" target="_blank">Read our Google reviews</a>
+          : <span class="btn btn-primary disabled">Read our Google reviews</span>}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+  <EstimateSection />
+</Base>

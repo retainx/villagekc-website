@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro';
+import { services } from '../data/services.js';
+const { exclude = '', limit = services.length, citySuffix = '' } = Astro.props;
+const list = services.filter((s) => s.slug !== exclude).slice(0, limit);
+---
+<div class="service-grid">
+  {list.map((s) => (
+    <a class="service-card" href={`/services/${s.slug}`}>
+      <span class="service-icon"><Icon name={s.icon} size={28} /></span>
+      <h3>{s.name}{citySuffix}</h3>
+      <p>{s.short}</p>
+      <span class="card-link">Learn more <Icon name="arrow" size={16} /></span>
+    </a>
+  ))}
+</div>

@@ -1,0 +1,10 @@
+---
+// Sticky Call / Text / Message bar on phones, so every page has all three CTAs in reach.
+import Icon from './Icon.astro';
+import { smsHref, telHref } from '../data/site.js';
+---
+<nav class="mobile-bar" aria-label="Contact">
+  <a href={telHref} data-cta="mobile-call"><Icon name="phone" /> Call</a>
+  <a href={smsHref} data-cta="mobile-text"><Icon name="text" /> Text</a>
+  <a href="#estimate" data-cta="mobile-message"><Icon name="mail" /> Message</a>
+</nav>
