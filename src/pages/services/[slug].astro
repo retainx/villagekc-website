@@ -8,7 +8,7 @@ import CtaBand from '../../components/CtaBand.astro';
 import EstimateSection from '../../components/EstimateSection.astro';
 import { site, smsHref, telHref } from '../../data/site.js';
 import { services } from '../../data/services.js';
-import { areas } from '../../data/areas.js';
+import { areas, placeName } from '../../data/areas.js';
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
@@ -24,7 +24,7 @@ const schema = [
     serviceType: s.name,
     description: s.short,
     provider: { '@id': `${site.url}/#business` },
-    areaServed: areas.map((a) => ({ '@type': 'City', name: `${a.city}, KS` })),
+    areaServed: areas.map((a) => ({ '@type': 'City', name: placeName(a) })),
   },
   {
     '@context': 'https://schema.org',
@@ -77,7 +77,7 @@ const schema = [
         </div>
 
         <h2>Areas we serve</h2>
-        <p>We provide {s.name.toLowerCase()} throughout Johnson County, including:</p>
+        <p>We provide {s.name.toLowerCase()} throughout Johnson County and the Kansas City area, including:</p>
         <AreaGrid />
       </article>
 

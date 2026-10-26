@@ -3,7 +3,7 @@
 import Icon from './Icon.astro';
 import { site, smsHref, telHref } from '../data/site.js';
 import { services } from '../data/services.js';
-import { areas } from '../data/areas.js';
+import { areas, placeName } from '../data/areas.js';
 const { service = '', city = '', compact = false } = Astro.props;
 ---
 <form class:list={['lead-form', { compact }]} data-endpoint={site.leadEndpoint} novalidate>
@@ -25,7 +25,7 @@ const { service = '', city = '', compact = false } = Astro.props;
         <span>City</span>
         <select name="city">
           <option value="">Select…</option>
-          {areas.map((a) => <option selected={a.city === city}>{a.city}</option>)}
+          {areas.map((a) => <option selected={placeName(a) === city}>{placeName(a)}</option>)}
           <option>Other</option>
         </select>
       </label>

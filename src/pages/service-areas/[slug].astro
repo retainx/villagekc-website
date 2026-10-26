@@ -7,18 +7,18 @@ import AreaGrid from '../../components/AreaGrid.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import EstimateSection from '../../components/EstimateSection.astro';
 import { site, smsHref, telHref } from '../../data/site.js';
-import { areas, state } from '../../data/areas.js';
+import { areas, placeName } from '../../data/areas.js';
 
 export function getStaticPaths() {
   return areas.map((a) => ({ params: { slug: a.slug }, props: { a } }));
 }
 const { a } = Astro.props;
-const place = `${a.city}, ${state}`;
+const place = placeName(a);
 const crumbs = [{ name: 'Service Areas', href: '/service-areas' }, { name: place, href: `/service-areas/${a.slug}` }];
 ---
 <Base
   title={`Electrician in ${place}`}
-  description={`Licensed, insured residential electrician in ${place}. Panel replacements, ceiling fans, EV chargers, lighting and repairs. Free estimates from ${site.name}.`}
+  description={`${a.licensed ? 'Licensed, insured' : 'Insured'} residential electrician in ${place}. Panel replacements, ceiling fans, EV chargers, lighting and repairs. Free estimates from ${site.name}.`}
   breadcrumbs={crumbs}
 >
   <section class="page-hero">
@@ -26,7 +26,7 @@ const crumbs = [{ name: 'Service Areas', href: '/service-areas' }, { name: place
       <div>
         <Breadcrumbs items={crumbs} />
         <h1>Residential electrician in {place}</h1>
-        <p class="lead">Licensed in Johnson County and insured, with a {site.warranty} on every job.</p>
+        <p class="lead">{a.licensed ? 'Licensed in Johnson County and insured' : 'Fully insured'}, with a {site.warranty} on every job.</p>
         <div class="cta-row">
           <a href={telHref} class="btn btn-accent btn-lg"><Icon name="phone" /> Call {site.phone.display}</a>
           <a href={smsHref} class="btn btn-light btn-lg"><Icon name="text" /> Text us</a>
@@ -68,5 +68,5 @@ const crumbs = [{ name: 'Service Areas', href: '/service-areas' }, { name: place
   </section>
 
   <CtaBand heading={`Need an electrician in ${a.city}?`} />
-  <EstimateSection heading={`Free estimates in ${a.city}`} city={a.city} />
+  <EstimateSection heading={`Free estimates in ${a.city}`} city={place} />
 </Base>

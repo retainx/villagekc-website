@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import MobileBar from '../components/MobileBar.astro';
 import DesignSwitcher from '../components/DesignSwitcher.astro';
 import { site } from '../data/site.js';
-import { areas } from '../data/areas.js';
+import { areas, placeName } from '../data/areas.js';
 
 const {
   title,
@@ -28,7 +28,7 @@ const business = {
   email: site.email,
   image: new URL(ogImage, site.url).href,
   priceRange: 'Free estimates',
-  areaServed: areas.map((a) => ({ '@type': 'City', name: `${a.city}, KS` })),
+  areaServed: areas.map((a) => ({ '@type': 'City', name: placeName(a) })),
   ...(site.googleBusinessUrl ? { sameAs: [site.googleBusinessUrl] } : {}),
 };
 

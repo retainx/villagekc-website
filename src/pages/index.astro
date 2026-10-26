@@ -8,6 +8,7 @@ import AreaGrid from '../components/AreaGrid.astro';
 import CtaBand from '../components/CtaBand.astro';
 import EstimateSection from '../components/EstimateSection.astro';
 import { site, smsHref, telHref } from '../data/site.js';
+import { areaListText } from '../data/areas.js';
 
 const why = [
   { icon: 'home', title: 'Residential only', text: 'Homes are all we do, so we show up ready for houses like yours, from 1950s ranches to new builds.' },
@@ -18,7 +19,7 @@ const why = [
 ---
 <Base
   title="Residential Electrician in Johnson County, KS"
-  description={`${site.name} is a licensed, insured residential electrician serving Overland Park, Leawood, Prairie Village, Lenexa, Shawnee, Mission and Roeland Park. Free estimates. Call or text today.`}
+  description={`${site.name} is a licensed, insured residential electrician serving ${areaListText}. Free estimates. Call or text today.`}
 >
   <section class="hero">
     <div class="hero-media" aria-hidden="true">
@@ -110,8 +111,8 @@ const why = [
     <div class="container split">
       <div>
         <p class="eyebrow">Service areas</p>
-        <h2>Proudly serving Johnson County, Kansas</h2>
-        <p>We're licensed in Johnson County and work throughout these communities:</p>
+        <h2>Proudly serving Johnson County and the Kansas City area</h2>
+        <p>Based in Johnson County, we work throughout these communities:</p>
         <AreaGrid />
       </div>
       <div class="reviews-card">

@@ -3,7 +3,7 @@ import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import { site, smsHref, telHref } from '../data/site.js';
 import { services } from '../data/services.js';
-import { areas } from '../data/areas.js';
+import { areas, placeName } from '../data/areas.js';
 ---
 <div class="topbar">
   <div class="container topbar-inner">
@@ -33,7 +33,7 @@ import { areas } from '../data/areas.js';
           <a href="/service-areas">Service Areas <Icon name="chevron" size={16} /></a>
           <div class="menu">
             {areas.map((a) => (
-              <a href={`/service-areas/${a.slug}`}><Icon name="pin" size={18} /> {a.city}</a>
+              <a href={`/service-areas/${a.slug}`}><Icon name="pin" size={18} /> {placeName(a)}</a>
             ))}
           </div>
         </li>

@@ -3,14 +3,14 @@ import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import { site, smsHref, telHref } from '../data/site.js';
 import { services } from '../data/services.js';
-import { areas } from '../data/areas.js';
+import { areas, placeName } from '../data/areas.js';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
       <Logo />
-      <p>Residential electrical service for homeowners in {site.region}. {site.licensed}, insured, with a {site.warranty} on our work.</p>
+      <p>Residential electrical service for homeowners in {site.region} and the Kansas City area. {site.licensed}, insured, with a {site.warranty} on our work.</p>
       <div class="footer-ctas">
         <a href={telHref} class="btn btn-accent btn-sm"><Icon name="phone" size={18} /> Call</a>
         <a href={smsHref} class="btn btn-ghost btn-sm"><Icon name="text" size={18} /> Text</a>
@@ -23,7 +23,7 @@ const year = new Date().getFullYear();
     </div>
     <div>
       <h3>Service areas</h3>
-      <ul>{areas.map((a) => <li><a href={`/service-areas/${a.slug}`}>{a.city}, KS</a></li>)}</ul>
+      <ul>{areas.map((a) => <li><a href={`/service-areas/${a.slug}`}>{placeName(a)}</a></li>)}</ul>
     </div>
     <div>
       <h3>Contact</h3>
