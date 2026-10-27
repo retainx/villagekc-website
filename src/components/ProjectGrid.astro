@@ -1,0 +1,43 @@
+---
+// Project cards. Renders nothing when the list is empty, so pages can include it unconditionally.
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { projectArea, projectServices } from '../data/projects.js';
+import { placeName } from '../data/areas.js';
+const { projects = [], heading = '', eyebrow = 'Recent work', more = false } = Astro.props;
+---
+{projects.length > 0 && (
+  <section class="section">
+    <div class="container">
+      {heading && (
+        <div class="section-head">
+          <p class="eyebrow">{eyebrow}</p>
+          <h2>{heading}</h2>
+        </div>
+      )}
+      <div class="project-grid">
+        {projects.map((p) => {
+          const area = projectArea(p);
+          const cover = p.data.cover ?? p.data.photos[0]?.src;
+          return (
+            <a class="project-card" href={`/projects/${p.id}`}>
+              <div class="project-thumb">
+                {cover
+                  ? <Image src={cover} alt="" widths={[400, 800]} sizes="(max-width: 640px) 100vw, 380px" />
+                  : <span class="project-thumb-empty"><Icon name={projectServices(p)[0]?.icon ?? 'bolt'} size={40} /></span>}
+                {p.data.draft && <span class="badge-draft">Draft</span>}
+              </div>
+              <div class="project-body">
+                <p class="project-meta"><Icon name="pin" size={15} /> {area ? placeName(area) : p.data.city}</p>
+                <h3>{p.data.title}</h3>
+                <p>{p.data.summary}</p>
+                <span class="card-link">See the project <Icon name="arrow" size={16} /></span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+      {more && <p class="section-more"><a href="/projects" class="btn btn-ghost">All projects <Icon name="arrow" size={18} /></a></p>}
+    </div>
+  </section>
+)}

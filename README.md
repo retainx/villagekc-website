@@ -20,6 +20,17 @@ npm run build      # outputs dist/
 | Colors and fonts | `src/styles/global.css` (top of file) |
 | Hero video | drop `hero.webm` + `hero.mp4` into `public/` |
 
+## Adding a project
+
+1. Copy `src/content/projects/aluminum-wiring-prairie-village/` to a new folder named like `panel-upgrade-leawood`.
+2. Put the photos (JPG/PNG, straight off the phone is fine) in that folder.
+3. Edit `index.md`: title, date, `city` (slug from `src/data/areas.js`), `services` (slugs from `src/data/services.js`),
+   a one-line summary, the `photos` list, and the write-up. Keep `draft: true` until it's ready.
+4. The project appears on /projects, on each tagged service page, on the city page and on the home page.
+   Photos are resized and compressed automatically.
+
+Drafts show in `npm run dev` only. Production builds (`npm run build` without NODE_ENV=development) leave them out.
+
 ## Design
 
 Style: Heritage (navy #001a45 + gold #f8cb07 from the logo), centered hero. Logo files are in `public/brand/`.

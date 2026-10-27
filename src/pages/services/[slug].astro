@@ -6,6 +6,8 @@ import ServiceGrid from '../../components/ServiceGrid.astro';
 import AreaGrid from '../../components/AreaGrid.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import EstimateSection from '../../components/EstimateSection.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import { getProjects } from '../../data/projects.js';
 import { site, smsHref, telHref } from '../../data/site.js';
 import { services } from '../../data/services.js';
 import { areas, placeName } from '../../data/areas.js';
@@ -14,6 +16,7 @@ export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
 }
 const { s } = Astro.props;
+const projects = await getProjects({ service: s.slug, limit: 3 });
 const crumbs = [{ name: 'Services', href: '/services' }, { name: s.name, href: `/services/${s.slug}` }];
 
 const schema = [
@@ -97,6 +100,7 @@ const schema = [
     </div>
   </section>
 
+  <ProjectGrid projects={projects} heading={`Recent ${s.navName.toLowerCase()} projects`} more />
   <CtaBand heading={`Need ${s.navName.toLowerCase()} help?`} />
   <EstimateSection heading={`Get a free ${s.navName.toLowerCase()} estimate`} service={s.slug} />
 </Base>

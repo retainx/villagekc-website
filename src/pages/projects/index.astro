@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import EstimateSection from '../../components/EstimateSection.astro';
+import { site } from '../../data/site.js';
+import { getProjects } from '../../data/projects.js';
+const projects = await getProjects();
+const crumbs = [{ name: 'Projects', href: '/projects' }];
+---
+<Base
+  title="Recent Electrical Projects in Johnson County & Kansas City"
+  description={`Real residential electrical projects by ${site.name}: panel upgrades, rewiring, lighting and more across Johnson County and the Kansas City area.`}
+  breadcrumbs={crumbs}
+>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Recent projects</h1>
+      <p class="lead">A look at real jobs we've done for homeowners around Johnson County and the Kansas City area.</p>
+    </div>
+  </section>
+  {projects.length
+    ? <ProjectGrid projects={projects} />
+    : <section class="section"><div class="container"><p class="muted">Projects coming soon.</p></div></section>}
+  <CtaBand heading="Have a project like these?" />
+  <EstimateSection />
+</Base>

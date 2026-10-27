@@ -6,8 +6,12 @@ import ServiceGrid from '../components/ServiceGrid.astro';
 import AreaGrid from '../components/AreaGrid.astro';
 import CtaBand from '../components/CtaBand.astro';
 import EstimateSection from '../components/EstimateSection.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import { getProjects } from '../data/projects.js';
 import { site, smsHref, telHref } from '../data/site.js';
 import { areaListText } from '../data/areas.js';
+
+const projects = await getProjects({ limit: 3 });
 
 const why = [
   { icon: 'home', title: 'Residential only', text: 'Homes are all we do, so we show up ready for houses like yours, from 1950s ranches to new builds.' },
@@ -99,6 +103,8 @@ const why = [
       </ol>
     </div>
   </section>
+
+  <ProjectGrid projects={projects} heading="Recent projects" more />
 
   <section class="section section-alt">
     <div class="container split">

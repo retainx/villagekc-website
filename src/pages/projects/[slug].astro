@@ -1,0 +1,105 @@
+---
+import { render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import EstimateSection from '../../components/EstimateSection.astro';
+import { site, smsHref, telHref } from '../../data/site.js';
+import { placeName } from '../../data/areas.js';
+import { getProjects, projectArea, projectServices } from '../../data/projects.js';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((p) => ({ params: { slug: p.id }, props: { p } }));
+}
+const { p } = Astro.props;
+const { Content } = await render(p);
+const area = projectArea(p);
+const place = area ? placeName(area) : p.data.city;
+const services = projectServices(p);
+const cover = p.data.cover ?? p.data.photos[0]?.src;
+const ogImage = cover ? (await getImage({ src: cover, width: 1200 })).src : undefined;
+const dateText = p.data.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+const related = (await getProjects({ service: p.data.services[0] })).filter((x) => x.id !== p.id).slice(0, 3);
+
+const crumbs = [{ name: 'Projects', href: '/projects' }, { name: p.data.title, href: `/projects/${p.id}` }];
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: p.data.title,
+  description: p.data.summary,
+  datePublished: p.data.date.toISOString().slice(0, 10),
+  ...(ogImage ? { image: new URL(ogImage, site.url).href } : {}),
+  author: { '@id': `${site.url}/#business` },
+  publisher: { '@id': `${site.url}/#business` },
+  about: services.map((s) => ({ '@type': 'Service', name: s.name })),
+  contentLocation: { '@type': 'City', name: place },
+}];
+---
+<Base
+  title={p.data.title}
+  description={p.data.summary}
+  breadcrumbs={crumbs}
+  schema={schema}
+  {...(ogImage ? { ogImage } : {})}
+>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>{p.data.title}</h1>
+      <p class="lead">{p.data.summary}</p>
+      <ul class="project-facts">
+        <li><Icon name="pin" size={18} /> {area ? <a href={`/service-areas/${area.slug}`}>{place}</a> : place}</li>
+        {services.map((s) => <li><Icon name={s.icon} size={18} /> <a href={`/services/${s.slug}`}>{s.navName}</a></li>)}
+        {p.data.homeYear && <li><Icon name="home" size={18} /> Built {p.data.homeYear}</li>}
+        <li><Icon name="clock" size={18} /> {dateText}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-grid">
+      <article class="prose">
+        {p.data.draft && <p class="draft-note">Draft: this project is only visible in local preview until <code>draft: false</code>.</p>}
+        {p.data.photos.length > 0
+          ? (
+            <div class="gallery">
+              {p.data.photos.map((ph, i) => (
+                <figure class:list={[{ wide: i === 0 }]}>
+                  <Image src={ph.src} alt={ph.alt} widths={[480, 960, 1440]} sizes={i === 0 ? '(max-width: 820px) 100vw, 760px' : '(max-width: 820px) 50vw, 370px'} loading={i === 0 ? 'eager' : 'lazy'} />
+                  {ph.caption && <figcaption>{ph.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          )
+          : <div class="photo-placeholder gallery-empty" role="img" aria-label="Project photos coming soon"><Icon name="bolt" size={48} /><span>Project photos go here</span></div>}
+        <Content />
+      </article>
+
+      <aside class="sidebar">
+        <div class="side-card">
+          <h3>Need something similar?</h3>
+          <p>Free estimates. {site.warranty}.</p>
+          <a href={telHref} class="btn btn-accent btn-block"><Icon name="phone" /> Call {site.phone.display}</a>
+          <a href={smsHref} class="btn btn-primary btn-block"><Icon name="text" /> Text us</a>
+          <a href="#estimate" class="btn btn-ghost btn-block"><Icon name="mail" /> Send a message</a>
+        </div>
+        <div class="side-card side-links">
+          <h3>Related</h3>
+          <ul>
+            {services.map((s) => <li><a href={`/services/${s.slug}`}>{s.name}</a></li>)}
+            {area && <li><a href={`/service-areas/${area.slug}`}>Electrician in {place}</a></li>}
+            <li><a href="/projects">All projects</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <ProjectGrid projects={related} heading="More projects like this" />
+  <CtaBand heading="Have a project like this?" />
+  <EstimateSection heading="Get a free estimate" service={p.data.services[0]} city={place} />
+</Base>

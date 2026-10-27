@@ -6,6 +6,8 @@ import ServiceGrid from '../../components/ServiceGrid.astro';
 import AreaGrid from '../../components/AreaGrid.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import EstimateSection from '../../components/EstimateSection.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import { getProjects } from '../../data/projects.js';
 import { site, smsHref, telHref } from '../../data/site.js';
 import { areas, placeName } from '../../data/areas.js';
 
@@ -14,6 +16,7 @@ export function getStaticPaths() {
 }
 const { a } = Astro.props;
 const place = placeName(a);
+const projects = await getProjects({ city: a.slug, limit: 3 });
 const crumbs = [{ name: 'Service Areas', href: '/service-areas' }, { name: place, href: `/service-areas/${a.slug}` }];
 ---
 <Base
@@ -49,6 +52,8 @@ const crumbs = [{ name: 'Service Areas', href: '/service-areas' }, { name: place
         )}
     </div>
   </section>
+
+  <ProjectGrid projects={projects} heading={`Recent projects in ${a.city}`} more />
 
   <section class="section section-alt">
     <div class="container">
