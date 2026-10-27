@@ -16,7 +16,8 @@ export const site = {
   licensed: 'Licensed in Johnson County, KS',
   insured: true,
 
-  googleBusinessUrl: 'https://share.google/81pbfxWqoKgScuOh6',
+  // Permanent Maps link built from the listing's CID (share link: https://share.google/81pbfxWqoKgScuOh6).
+  googleBusinessUrl: 'https://maps.google.com/maps?cid=17842166691526005960',
   googleReviewUrl: '', // TODO(owner): "write a review" link
 
   // Lead form target. Empty = not wired yet (the form shows a notice instead of sending).
