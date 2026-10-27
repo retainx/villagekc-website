@@ -20,14 +20,14 @@ npm run build      # outputs dist/
 | Colors / fonts / the three design options | `src/styles/global.css` (top of file) |
 | Hero video | drop `hero.webm` + `hero.mp4` into `public/` |
 
-## Design review
+## Design
 
-A "Design options" button (bottom-left) switches between styles A/B/C and hero layouts 1/2/3.
-You can also link a combo directly: `/?theme=modern&hero=split`.
-Turn it off before launch with `showDesignSwitcher: false` in `src/data/site.js`, then trim the unused fonts in `src/layouts/Base.astro`.
+Style: Heritage (navy #001a45 + gold #f8cb07 from the logo), centered hero. Logo files are in `public/brand/`.
+
+
 
 ## Before launch
 
-- Real phone/text numbers, Google Business link, logo, OG image (`public/og-image.jpg`)
+- Hero video
 - City content, about-page story and photos
 - Wire `leadEndpoint` to the estimating app's public lead route

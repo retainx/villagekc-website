@@ -3,7 +3,6 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBar from '../components/MobileBar.astro';
-import DesignSwitcher from '../components/DesignSwitcher.astro';
 import { site } from '../data/site.js';
 import { areas, placeName } from '../data/areas.js';
 
@@ -27,6 +26,7 @@ const business = {
   telephone: site.phone.tel,
   email: site.email,
   image: new URL(ogImage, site.url).href,
+  logo: `${site.url}/brand/icon-192.png`,
   priceRange: 'Free estimates',
   areaServed: areas.map((a) => ({ '@type': 'City', name: placeName(a) })),
   ...(site.googleBusinessUrl ? { sameAs: [site.googleBusinessUrl] } : {}),
@@ -48,15 +48,16 @@ const crumbSchema = breadcrumbs.length
 const jsonLd = [business, crumbSchema, ...schema].filter(Boolean);
 ---
 <!doctype html>
-<html lang="en" data-theme="heritage" data-hero="full">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#13294b" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#001a45" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
@@ -67,24 +68,10 @@ const jsonLd = [business, crumbSchema, ...schema].filter(Boolean);
     <meta property="og:image" content={new URL(ogImage, site.url).href} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    {site.showDesignSwitcher && (
-      <script is:inline>
-        // ?theme=modern&hero=split overrides (and saves) the choice, for sharing a specific combo.
-        (function () {
-          var q = new URLSearchParams(location.search), d = document.documentElement;
-          ['theme', 'hero'].forEach(function (k) {
-            var v = q.get(k);
-            try { if (v) localStorage.setItem('ve-' + k, v); else v = localStorage.getItem('ve-' + k); } catch (e) {}
-            if (v) d.dataset[k] = v;
-          });
-        })();
-      </script>
-    )}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- All three option fonts load during design review; trim to the chosen one before launch. -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" />
 
     {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
   </head>
@@ -96,6 +83,5 @@ const jsonLd = [business, crumbSchema, ...schema].filter(Boolean);
     </main>
     <Footer />
     <MobileBar />
-    {site.showDesignSwitcher && <DesignSwitcher />}
   </body>
 </html>

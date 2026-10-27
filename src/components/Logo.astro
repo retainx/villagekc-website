@@ -1,15 +1,11 @@
 ---
-// Placeholder wordmark until a real logo exists.
+// variant "navy" for light backgrounds, "white" for dark ones.
 import { site } from '../data/site.js';
+const { variant = 'navy' } = Astro.props;
 ---
 <a href="/" class="logo" aria-label={`${site.name} home`}>
-  <span class="logo-mark" aria-hidden="true">
-    <svg viewBox="0 0 32 32" width="34" height="34">
-      <path d="M4 15 16 5l12 10v13H4z" fill="currentColor" />
-      <path d="m17.5 10-5 8h4l-1.5 7 5-8.5h-4z" fill="var(--accent)" />
-    </svg>
-  </span>
-  <span class="logo-text">
-    <span class="logo-name">Village</span><span class="logo-sub">Electric</span>
-  </span>
+  <picture>
+    <source srcset={`/brand/logo-${variant}.webp`} type="image/webp" />
+    <img src={`/brand/logo-${variant}.png`} alt={site.name} width="640" height="264" />
+  </picture>
 </a>
