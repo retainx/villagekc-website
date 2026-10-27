@@ -17,14 +17,12 @@ npm run build      # outputs dist/
 | Phone, email, license, warranty, Google link, lead endpoint | `src/data/site.js` |
 | Services (copy, bullets, FAQs) | `src/data/services.js` |
 | Service-area cities (local copy goes in `content`) | `src/data/areas.js` |
-| Colors / fonts / the three design options | `src/styles/global.css` (top of file) |
+| Colors and fonts | `src/styles/global.css` (top of file) |
 | Hero video | drop `hero.webm` + `hero.mp4` into `public/` |
 
 ## Design
 
 Style: Heritage (navy #001a45 + gold #f8cb07 from the logo), centered hero. Logo files are in `public/brand/`.
-
-
 
 ## Before launch
 
