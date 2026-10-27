@@ -111,10 +111,11 @@ const why = [
       <div class="reviews-card">
         <div class="stars" aria-hidden="true">{[1, 2, 3, 4, 5].map(() => <Icon name="star" size={22} />)}</div>
         <h3>What our customers say</h3>
-        <p class="muted">Google reviews will be shown here once the Google Business link is added.</p>
-        {site.googleBusinessUrl
-          ? <a class="btn btn-primary" href={site.googleBusinessUrl} rel="noopener" target="_blank">Read our Google reviews</a>
-          : <span class="btn btn-primary disabled">Read our Google reviews</span>}
+        <p class="muted">See what Johnson County homeowners say about working with us on Google.</p>
+        <div class="cta-row review-ctas">
+          <a class="btn btn-primary" href={site.googleBusinessUrl} rel="noopener" target="_blank"><Icon name="star" size={18} /> Read our Google reviews</a>
+          <a class="btn btn-ghost" href={site.googleReviewUrl} rel="noopener" target="_blank">Leave us a review</a>
+        </div>
       </div>
     </div>
   </section>

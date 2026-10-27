@@ -18,7 +18,7 @@ export const site = {
 
   // Permanent Maps link built from the listing's CID (share link: https://share.google/81pbfxWqoKgScuOh6).
   googleBusinessUrl: 'https://maps.google.com/maps?cid=17842166691526005960',
-  googleReviewUrl: '', // TODO(owner): "write a review" link
+  googleReviewUrl: 'https://g.page/r/CcjUtvcSHJz3EBM/review',
 
   // Lead form target. Empty = not wired yet (the form shows a notice instead of sending).
   // Plan: POST to the estimating app so leads land on its Leads page as source "Website".
