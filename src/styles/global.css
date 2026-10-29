@@ -338,6 +338,7 @@ p { margin: 0 0 1em; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
 .gallery figure { margin: 0; }
 .gallery figure.wide { grid-column: span 2; }
+.gallery figure.wide img { aspect-ratio: 4 / 3; object-fit: cover; }
 .gallery img { width: 100%; height: auto; border-radius: var(--radius-lg); }
 .gallery figcaption { font-size: 0.88rem; color: var(--muted); margin-top: 6px; }
 .gallery-empty { margin-bottom: 32px; aspect-ratio: 16 / 9; }

@@ -3,46 +3,56 @@ slug: aluminum-wiring-prairie-village
 title: Aluminum Wiring Repair in Prairie Village
 date: 2026-10-01             # TODO(owner): month the job was done
 city: prairie-village-ks
-services: [home-rewiring]
-summary: Making a Prairie Village home's original aluminum branch wiring safe by pigtailing every connection with copper.
-homeYear: 1968               # TODO(owner): year the home was built (delete the line if unknown)
-draft: true                  # set to false when the details and photos are in
-# Photos: put them in this folder, then list them like this (first one is the main photo):
-# photos:
-#   - src: ./panel-before.jpg
-#     alt: Aluminum branch circuit wires at the breaker panel before the repair
-#     caption: Before
-#   - src: ./outlet-after.jpg
-#     alt: Outlet with copper pigtails and AlumiConn connectors
-#     caption: After
+services: [home-rewiring, electrical-inspections, smoke-co-detectors]
+summary: After an outlet fire in a 1975 Prairie Village home, we found overheating throughout the house and repaired the aluminum branch wiring with AlumiConn connectors, without a full rewire.
+homeYear: 1975
+draft: false
+photos:
+  - src: ./melted-connector-in-box.jpg
+    alt: Scorched wire connector and heat-damaged insulation inside a switch box on aluminum branch wiring
+    caption: A scorched connector inside a switch box, found during the inspection
+  - src: ./melted-wire-nut.jpg
+    alt: Melted wire nut removed from aluminum wiring, with charred insulation on the wires
+    caption: A melted wire nut and charred insulation on the conductors
+  - src: ./damaged-switch-wiring.jpg
+    alt: Aluminum switch wiring with a failed copper splice and damaged insulation
+    caption: A failed aluminum-to-copper splice behind a switch
 ---
 
-<!--
-DRAFT. Everything in [brackets] is a guess or a blank for the owner to fill in.
-Keep it short and specific. Real details (what you found, what you used) are what make it rank.
--->
+Homes built in the 1960s and 1970s often have aluminum branch-circuit wiring, which can become a fire hazard as its connections deteriorate. We help homeowners find these risks and choose a safe, practical repair.
 
-## What the homeowner needed
+We recently repaired the aluminum wiring in a 1975 home in Prairie Village, Kansas, after an outlet fire.
 
-The homeowners [had just bought / had lived in] a [1968] home in Prairie Village with its original single-strand aluminum branch wiring, common in homes built in the mid-1960s to mid-1970s. [Their home inspector / insurance company flagged it. / They noticed warm outlets and flickering lights.]
+## Inspection and findings
 
-## What we found
+We inspected the home's outlets, switches and lighting connections and found multiple signs of overheating and arcing. Several wire connectors had melted, including connectors made specifically for joining aluminum to copper.
 
-[What you saw when you opened things up: loose or discolored connections, devices not rated for aluminum, overheated outlets, how many circuits were aluminum.]
+The problem went well beyond the outlet where the fire started. It was throughout the house.
 
-## What we did
+## Aluminum wiring repair options
 
-Instead of a full rewire, we repaired every aluminum connection in the home:
+The U.S. Consumer Product Safety Commission (CPSC) recommends three approaches, in order of preference:
 
-- [Pigtailed each aluminum wire to a short copper lead using AlumiConn / COPALUM connectors at every outlet, switch and fixture]
-- [Replaced worn devices with new outlets and switches]
-- [Checked and retorqued connections at the panel]
-- [Anything else: AFCI/GFCI, smoke detectors, panel work]
+1. **Rewire with copper.** This is the preferred fix: the aluminum branch-circuit wiring is replaced with copper.
+2. **COPALUM crimp connectors.** A permanent repair that uses special crimp connectors and requires certified installers.
+3. **AlumiConn connectors.** An acceptable alternative when COPALUM isn't available. They make a secure aluminum-to-copper connection.
 
-The job took [two days] and the homeowners had power in most of the house throughout.
+For this home we used AlumiConn connectors. They were less invasive and more affordable than rewiring the whole house.
 
-## The result
+## Our repair approach
 
-[One or two sentences: the home is safer, the inspection item is closed, insurance accepted it, etc.]
+We worked with the homeowners to do the repairs in phases, starting with the bedrooms and the rooms they use most. We also recommended replacing the home's smoke and carbon monoxide alarms right away.
 
-Have aluminum wiring in your home? It doesn't always mean a full rewire. [Call or text us](/contact#estimate) for a free estimate.
+Most connections were repaired without opening walls or damaging finishes. A few electrical boxes had to be enlarged to fit the new connectors.
+
+## What homeowners should know
+
+- Aluminum wiring is still common and acceptable for larger service and feeder conductors. The concern is older, smaller-gauge aluminum wiring that serves outlets, switches and lights.
+- The CPSC does not recognize every aluminum-to-copper connector as a permanent repair.
+- Check with your insurance provider before you choose a repair method.
+
+Reference: [CPSC Publication 516, Repairing Aluminum Wiring](https://www.cpsc.gov/s3fs-public/516.pdf)
+
+## Aluminum wiring inspections and repairs
+
+Village Electric inspects, troubleshoots and repairs aluminum wiring in Prairie Village and across the Kansas City metro. If you have aluminum wiring or a warm or discolored outlet, [call or text us](/contact#estimate) for a free estimate.
