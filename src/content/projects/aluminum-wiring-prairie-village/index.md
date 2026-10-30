@@ -1,7 +1,7 @@
 ---
 slug: aluminum-wiring-prairie-village
 title: Aluminum Wiring Repair in Prairie Village
-date: 2026-10-01             # TODO(owner): month the job was done
+date: 2025-10-01
 city: prairie-village-ks
 services: [home-rewiring, electrical-inspections, smoke-co-detectors]
 summary: After an outlet fire in a 1975 Prairie Village home, we found overheating throughout the house and repaired the aluminum branch wiring with AlumiConn connectors, without a full rewire.
@@ -17,6 +17,12 @@ photos:
   - src: ./damaged-switch-wiring.jpg
     alt: Aluminum switch wiring with a failed copper splice and damaged insulation
     caption: A failed aluminum-to-copper splice behind a switch
+  - src: ./after-alumiconn-ceiling-box.jpg
+    alt: Ceiling junction box after the repair, with aluminum wires joined to copper using purple AlumiConn connectors
+    caption: After, a ceiling box repaired with AlumiConn connectors
+  - src: ./after-alumiconn-switch.jpg
+    alt: Switch wiring after the repair, with AlumiConn connectors joining aluminum wires to copper pigtails
+    caption: After, a switch reconnected with AlumiConn pigtails
 ---
 
 Homes built in the 1960s and 1970s often have aluminum branch-circuit wiring, which can become a fire hazard as its connections deteriorate. We help homeowners find these risks and choose a safe, practical repair.
@@ -52,7 +58,3 @@ Most connections were repaired without opening walls or damaging finishes. A few
 - Check with your insurance provider before you choose a repair method.
 
 Reference: [CPSC Publication 516, Repairing Aluminum Wiring](https://www.cpsc.gov/s3fs-public/516.pdf)
-
-## Aluminum wiring inspections and repairs
-
-Village Electric inspects, troubleshoots and repairs aluminum wiring in Prairie Village and across the Kansas City metro. If you have aluminum wiring or a warm or discolored outlet, [call or text us](/contact#estimate) for a free estimate.
