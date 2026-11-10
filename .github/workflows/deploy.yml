@@ -1,0 +1,41 @@
+name: Deploy
+
+# Push to main -> build the site and copy dist/ to the droplet. nginx serves the
+# files directly; there is no Node process on the server.
+# Repo secrets (Settings > Secrets and variables > Actions): SSH_PRIVATE_KEY,
+# SSH_HOST, SSH_USER. See README "Deploying".
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # "Run workflow" button on the Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to villagekc.com
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          SOURCE: dist/
+          TARGET: /var/www/villagekc.com/html/
+          # --delete removes pages that no longer exist in the build.
+          ARGS: "-rlptvz --delete --chmod=D755,F644"
