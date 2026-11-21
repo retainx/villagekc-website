@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
-import Icon from '../components/Icon.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import TrustBar from '../components/TrustBar.astro';
 import CtaBand from '../components/CtaBand.astro';
 import EstimateSection from '../components/EstimateSection.astro';
+import { Image } from 'astro:assets';
 import { site } from '../data/site.js';
+import aboutPhoto from '../assets/about-service-install.jpg';
 const crumbs = [{ name: 'About', href: '/about' }];
 ---
 <Base
@@ -29,9 +30,13 @@ const crumbs = [{ name: 'About', href: '/about' }];
         <p>{site.name} has helped Johnson County homeowners with their electrical needs for {site.yearsInBusiness} years. We focus on residential work, so every job gets the attention it deserves, whether it's a single outlet or a full panel replacement.</p>
         <p>We're licensed in Johnson County, Kansas, and fully insured, and every job is backed by our {site.warranty}.</p>
       </div>
-      <div class="photo-placeholder" aria-hidden="true">
-        <Icon name="bolt" size={48} />
-      </div>
+      <Image
+        src={aboutPhoto}
+        alt="New meter and service disconnect enclosures being installed on a brick home exterior"
+        class="about-photo"
+        widths={[480, 745]}
+        sizes="(max-width: 800px) 100vw, 560px"
+      />
     </div>
   </section>
 
