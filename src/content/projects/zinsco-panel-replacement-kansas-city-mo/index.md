@@ -29,6 +29,9 @@ photos:
   - src: ./ground-rod-electrode-conductor.jpg
     alt: Copper grounding electrode conductor clamped to a ground rod outside the house
     caption: The additional ground rod and its jumper
+  - src: ./new-siemens-panel-directory.jpg
+    alt: Open Siemens 100 amp panel with new breakers and every circuit labeled on the panel directory
+    caption: Finished, with every circuit labeled
 ---
 
 The owners of a 1965 duplex in Kansas City, Missouri live in one side and rent out the other. A home inspection had flagged both units' breaker panels as Sylvania, a Zinsco design known as a fire hazard. They didn't want to lose any sleep over it, so they called us to replace both.
