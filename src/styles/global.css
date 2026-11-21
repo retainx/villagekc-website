@@ -276,6 +276,13 @@ p { margin: 0 0 1em; }
 .form-status:empty { display: none; }
 .form-status.error { color: #b3261e; }
 .form-status.success { color: #1a7f37; font-weight: 600; }
+.lead-form.sent > :not(.form-success) { display: none; }
+.form-success { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center; padding: 24px 8px; outline: none; }
+.form-success[hidden] { display: none; }
+.form-success-icon { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #e6f4ea; color: #1a7f37; margin-bottom: 12px; }
+.form-success h3 { margin: 0; color: var(--navy); font-size: 1.6rem; }
+.form-success p { margin: 4px 0 0; color: var(--muted); }
+.form-success .form-success-alt { margin: 12px 0 16px; }
 .form-status.notice { color: var(--muted); background: var(--surface-alt); padding: 10px; border-radius: var(--radius); word-break: break-word; }
 .lead-form.compact .form-grid { gap: 10px; }
 

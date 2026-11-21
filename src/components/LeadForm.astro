@@ -60,10 +60,23 @@ const { service = '', city = '', compact = false } = Astro.props;
   </button>
   <p class="form-alt">Prefer to talk? <a href={telHref}>Call</a> or <a href={smsHref}>text</a> {site.phone.display}.</p>
   <p class="form-status" role="status" aria-live="polite"></p>
+  <!-- Replaces the fields after a successful send, filling the same space. -->
+  <div class="form-success" tabindex="-1" hidden>
+    <span class="form-success-icon"><Icon name="check" size={32} /></span>
+    <h3>Thanks, we got your message!</h3>
+    <p>We'll be in touch soon, usually the same business day.</p>
+    <p class="form-success-alt">Need us sooner? <a href={telHref}>Call</a> or <a href={smsHref}>text</a> {site.phone.display}.</p>
+    <button type="button" class="btn btn-ghost btn-sm" data-send-another>Send another request</button>
+  </div>
 </form>
 
 <script>
   document.querySelectorAll('form.lead-form').forEach((form) => {
+    form.querySelector('[data-send-another]').addEventListener('click', () => {
+      form.classList.remove('sent');
+      form.querySelector('.form-success').hidden = true;
+      form.elements.email.focus();
+    });
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = form.querySelector('.form-status');
@@ -99,8 +112,15 @@ const { service = '', city = '', compact = false } = Astro.props;
         });
         if (!res.ok) throw new Error(String(res.status));
         form.reset();
-        status.textContent = "Thanks! We got your request and will be in touch soon.";
-        status.className = 'form-status success';
+        status.textContent = '';
+        status.className = 'form-status';
+        // Swap the fields for the thank-you panel at the same height, then bring it into view.
+        const success = form.querySelector('.form-success');
+        success.style.minHeight = `${form.offsetHeight}px`;
+        form.classList.add('sent');
+        success.hidden = false;
+        success.focus({ preventScroll: true });
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch {
         status.textContent = "Sorry, that didn't go through. Please call or text us instead.";
         status.className = 'form-status error';
