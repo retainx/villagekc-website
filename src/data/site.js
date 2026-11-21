@@ -21,8 +21,7 @@ export const site = {
   googleReviewUrl: 'https://g.page/r/CcjUtvcSHJz3EBM/review',
 
   // Lead form target. Empty = not wired yet (the form shows a notice instead of sending).
-  // Plan: POST to the estimating app so leads land on its Leads page as source "Website".
-  leadEndpoint: '',
+  leadEndpoint: 'https://app.villagekc.com/api/public/lead', // estimating app: creates a Website lead + emails the owner
 };
 
 export const smsHref = `sms:${site.text.sms}`;

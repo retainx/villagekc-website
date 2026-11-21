@@ -39,7 +39,6 @@ Style: Heritage (navy #001a45 + gold #f8cb07 from the logo), centered hero. Logo
 
 - Hero video
 - City content, about-page story and photos
-- Wire `leadEndpoint` to the estimating app's public lead route
 
 ## Deploying
 
