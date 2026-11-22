@@ -7,6 +7,8 @@ import EstimateSection from '../../components/EstimateSection.astro';
 import { site } from '../../data/site.js';
 import { getProjects } from '../../data/projects.js';
 const projects = await getProjects();
+// No published projects yet: send visitors to the home page instead of an empty list.
+if (!projects.length) return Astro.redirect('/');
 const crumbs = [{ name: 'Projects', href: '/projects' }];
 ---
 <Base
@@ -21,9 +23,7 @@ const crumbs = [{ name: 'Projects', href: '/projects' }];
       <p class="lead">A look at real jobs we've done for homeowners around Johnson County and the Kansas City area.</p>
     </div>
   </section>
-  {projects.length
-    ? <ProjectGrid projects={projects} />
-    : <section class="section"><div class="container"><p class="muted">Projects coming soon.</p></div></section>}
+  <ProjectGrid projects={projects} />
   <CtaBand heading="Have a project like these?" />
   <EstimateSection />
 </Base>

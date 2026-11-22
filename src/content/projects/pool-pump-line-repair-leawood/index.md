@@ -5,7 +5,7 @@ date: 2025-11-01
 city: leawood-ks
 services: [troubleshooting-repairs]
 summary: An excavator repairing a sewer line broke the buried conduit to a Leawood pool pump. We spliced the circuit in a rated underground junction box, set at grade so it can be opened later for landscape lighting.
-draft: false
+draft: true
 photos:
   - src: ./damaged-pool-pump-line.jpg
     alt: Broken pool pump conduit and wiring exposed in a backyard excavation, with a tape measure showing the depth

@@ -6,7 +6,7 @@ city: prairie-village-ks
 services: [home-rewiring, electrical-inspections, smoke-co-detectors]
 summary: After an outlet fire in a 1975 Prairie Village home, we found overheating throughout the house and repaired the aluminum branch wiring with AlumiConn connectors, without a full rewire.
 homeYear: 1975
-draft: false
+draft: true
 photos:
   - src: ./melted-connector-in-box.jpg
     alt: Scorched wire connector and heat-damaged insulation inside a switch box on aluminum branch wiring

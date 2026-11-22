@@ -6,7 +6,7 @@ city: kansas-city-mo
 services: [breaker-panel-replacement]
 summary: We replaced both Sylvania (Zinsco-design) panels in a 1965 Kansas City, Missouri duplex with new Siemens panels in a single day, and upgraded the grounding and bonding to meet KCMO requirements.
 homeYear: 1965
-draft: false
+draft: true
 photos:
   - src: ./old-zinsco-panel-open.jpg
     alt: Original Sylvania Zinsco-design breaker panel with colored breaker handles and crowded wiring
