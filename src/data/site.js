@@ -4,7 +4,7 @@ export const site = {
   name: 'Village Electric',
   legalName: 'Village Electric',
   url: 'https://villagekc.com',
-  email: 'mike@villagekc.com',
+  email: 'john@villagekc.com',
 
   phone: { display: '(913) 669-7993', tel: '+19136697993' },
   text: { display: '(913) 669-7993', sms: '+19136697993' },
